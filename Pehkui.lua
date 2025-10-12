@@ -59,15 +59,9 @@ local function loadConfig()
     end
 end
 
-function pehkui.initFlags(scaleList)
-    for k, _ in pairs(scaleList) do
-        if pehkui.options[k] == nil then
-            pehkui.options[k] = true
-            config:save(k, true)
-        end
-    end
-end
-
+--- Sets the state of a flag
+--- @param scale string The scaling option as string
+--- @param state boolean Whether the script should scale this option
 function pehkui.setScaleState(scale, state)
     assert(pehkui.options[scale] ~= nil, 'Unknown scaling option')
     pehkui.options[scale] = state
@@ -112,6 +106,10 @@ function events.tick()
 end
 
 -- SCALING
+--- Sends scaling command with provided values. Can be forced.
+--- @param scale string The scaling option as string
+--- @param value number The value of the scaling option
+--- @param forceScaling boolean If true, forces the function to push a command regardless of the flag state
 function pehkui.setScale(scale, value, forceScaling)
     if pehkui.options[scale] == false and not forceScaling then return end
 
