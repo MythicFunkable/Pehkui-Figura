@@ -60,18 +60,11 @@ local function loadConfig()
 end
 
 function pehkui.initFlags(scaleList)
-    local changed = false
     for k, _ in pairs(scaleList) do
-        -- Only create if it doesn't exist at all
         if pehkui.options[k] == nil then
-            pehkui.options[k] = true   -- default for new keys
+            pehkui.options[k] = true
             config:save(k, true)
-            changed = true
-            log("Registered new scaling flag: " .. k)
         end
-    end
-    if changed then
-        log("Pehkui flags updated")
     end
 end
 
@@ -113,14 +106,14 @@ function events.tick()
         if commandQueue:isEmpty() then return end
 
         local command = commandQueue:pop()
-        log(command)
+        --log(command)
         host:sendChatCommand(command)
     else queueTimer = queueTimer + 1 end
 end
 
 -- SCALING
-function pehkui.setScale(scale, value)
-    if pehkui.options[scale] == false and value ~= 1 then return end
+function pehkui.setScale(scale, value, forceScaling)
+    if pehkui.options[scale] == false and not forceScaling then return end
 
     if pehkui.opCheck and pehkui.pehkuiCheck then
         commandQueue:push('scale set '..scale..' '..value..' @s')
