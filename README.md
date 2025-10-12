@@ -2,6 +2,17 @@
 
 A Figura library that allows models to send Pehkui and P4A scaling commands, as well as toggling scaling
 
+**Table of contents**
+- [Features](#️-features)
+- [Installation](#️-installation)
+- [Functions](#-functions)
+    - [Pehkui Figura](#pehkui-figura)
+        - [Require](#require)
+    - [Flags](#flags)
+        - [Set Scale State](#setscalestate)
+    - [Scaling](#scaling)
+        - [Set Scale](#setscale)
+
 ## ⚙️ Features
 
 - **Pehkui and Pehkui4All compatibility**: automatically send Pehkui or P4A commands depending on which mod is installed.
@@ -27,7 +38,7 @@ Now you can make your model send Pehkui/P4A commands for you, this by using the 
 
 ### Pehkui Figura
 
-### Require
+#### Require
 
 Import the Pehkui script.
 
