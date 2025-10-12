@@ -26,7 +26,7 @@ A Figura library that allows models to send Pehkui and P4A scaling commands, as 
 2. Import the library:
 
     ```lua
-    local adipose = require('Adipose')
+    local pehkui = require('Pehkui')
     ```
 
 3. In Minecraft, open the pause menu, and click on the Figura icon. Click on the settings tab, and search for **Chat Messages** under the **Dev** section, and enable it.
