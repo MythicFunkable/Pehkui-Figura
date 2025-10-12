@@ -17,6 +17,7 @@ A Figura library that allows models to send Pehkui and P4A scaling commands, as 
 
 - **Pehkui and Pehkui4All compatibility**: automatically send Pehkui or P4A commands depending on which mod is installed.
 - **Scaling preferences via config**: set which scaling option the script is supposed to change.
+- **Queued scaling**: any scaling command will be added to a queue which will slowly send commands overtime, this to avoid getting kicked for spamming.
 
 ## 🛠️ Installation
 
