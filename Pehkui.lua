@@ -74,21 +74,21 @@ function events.entity_init()
 	pehkui.p4aCheck = client:isModLoaded("pehkui4all")
     pehkui.opCheck = player:getPermissionLevel() == 4   
 
-    --IF YOU HATE THE STARTUP MESSAGE THIS IS THE THING TO DELETE! \/
+    -- COMMENT THIS CODE BLOCK OUT IF YOU DISLIKE THE STARTUP MESSAGE \/
 
     if pehkui.pehkuiCheck then
         if pehkui.opCheck then
-            print("OP Detected, Using /scale for Scaling")
+            print("OP detected! You have full access to Pehkui scaling.")
         elseif pehkui.p4aCheck then
-            print("Pehkui 4 All Detected, Using /lesserscale for Scaling")
+            print("P4A detected! You have full access to Pehkui scaling.")
         else
-            print("Insufficient Permissions for Scaling, Scaling Disabled")
+            print("Insufficient permissions for Pehkui scaling. Module has been disabled")
         end	
     else
-        print("Pehkui not Installed, scaling Disabled")
+        print("Pehkui isn't installed, scaling has been disabled!")
     end
 
-    --IF YOU HATE THE STARTUP MESSAGE THIS IS THE THING TO DELETE! /\
+    -- COMMENT THIS CODE BLOCK OUT IF YOU DISLIKE THE STARTUP MESSAGE /\
 
     loadConfig()
 end
