@@ -27,9 +27,32 @@ function Queue:pop()
     end
 
     local value = self.data[self.head]
+
+    if not value then
+        -- print("Value not found, reorganizing queue")
+
+        local indexCounter = 1
+        for index,object in pairs(self.data) do
+            if indexCounter == 1 then
+                value = object
+            end
+            self.data[indexCounter] = object
+            self.data[index] = nil
+            indexCounter = indexCounter + 1
+        end
+        -- reset head and tail
+        self.head = 1
+        self.tail = #self.data
+    end
+
     self.data[self.head] = nil
     self.head = self.head + 1
     return value
+end
+
+function Queue:remove(index)
+    self.data[index] = nil
+    self.tail = self.tail - 1
 end
 
 function Queue:isEmpty()

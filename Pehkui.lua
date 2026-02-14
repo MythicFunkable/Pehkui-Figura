@@ -113,6 +113,13 @@ end
 function pehkui.setScale(scale, value, forceScaling)
     if pehkui.options[scale] == false and not forceScaling then return end
 
+    -- checking to see if the item exists already
+    for index,param in pairs(commandQueue.data) do
+        if string.find(param, scale) then
+            commandQueue:remove(index)
+        end
+    end
+
     if pehkui.opCheck and pehkui.pehkuiCheck then
         commandQueue:push('scale set '..scale..' '..value..' @s')
     elseif pehkui.p4aCheck then
