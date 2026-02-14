@@ -100,6 +100,7 @@ function events.tick()
         if commandQueue:isEmpty() then return end
 
         local command = commandQueue:pop()
+        print(commandQueue.data)
         --log(command)
         host:sendChatCommand(command)
     else queueTimer = queueTimer + 1 end
@@ -113,19 +114,34 @@ end
 function pehkui.setScale(scale, value, forceScaling)
     if pehkui.options[scale] == false and not forceScaling then return end
 
+    local IndexToReplace
+
     -- checking to see if the item exists already
     for index,param in pairs(commandQueue.data) do
         if string.find(param, scale) then
-            commandQueue:remove(index)
+            -- give us that index for later
+            IndexToReplace = index
+            break
         end
     end
 
     if pehkui.opCheck and pehkui.pehkuiCheck then
-        commandQueue:push('scale set '..scale..' '..value..' @s')
+        local str = 'scale set '..scale..' '..value..' @s'
+        if IndexToReplace then -- if there is something marked for replacement
+            commandQueue.data[IndexToReplace] = str -- replace it
+        else
+            commandQueue:push(str) -- push it
+        end
     elseif pehkui.p4aCheck then
         local prefixIndex = string.find(scale, ":")
         scale = string.sub(scale, prefixIndex+1)
-        commandQueue:push(string.format('p4ascale set "%s" %s', scale, value))
+        
+        local str = string.format('p4ascale set "%s" %s', scale, value)
+        if IndexToReplace then -- same thing here
+            commandQueue.data[IndexToReplace] = str
+        else
+            commandQueue:push(str)
+        end
     end
 end
 
