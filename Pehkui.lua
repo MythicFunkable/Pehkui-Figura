@@ -118,7 +118,7 @@ function pehkui.setScale(scale, value, forceScaling)
     elseif pehkui.p4aCheck then
         local prefixIndex = string.find(scale, ":")
         scale = string.sub(scale, prefixIndex+1)
-        commandQueue:push(string.format('p4ascale set %s %s', value, scale))
+        commandQueue:push(string.format('p4ascale set "%s" %s', value, scale))
     end
 end
 
