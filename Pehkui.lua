@@ -100,7 +100,6 @@ function events.tick()
         if commandQueue:isEmpty() then return end
 
         local command = commandQueue:pop()
-        print(commandQueue.data)
         --log(command)
         host:sendChatCommand(command)
     else queueTimer = queueTimer + 1 end
