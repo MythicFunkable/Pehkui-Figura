@@ -132,9 +132,6 @@ function pehkui.setScale(scale, value, forceScaling)
             commandQueue:push(str) -- push it
         end
     elseif pehkui.p4aCheck then
-        local prefixIndex = string.find(scale, ":")
-        scale = string.sub(scale, prefixIndex+1)
-        
         local str = string.format('p4ascale set "%s" %s', scale, value)
         if IndexToReplace then -- same thing here
             commandQueue.data[IndexToReplace] = str
