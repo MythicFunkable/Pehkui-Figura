@@ -78,9 +78,9 @@ function events.entity_init()
 
     if pehkui.pehkuiCheck then
         if pehkui.opCheck then
-            print("OP detected! You have full access to Pehkui scaling.")
+            print("OP detected!\nYou have full, unrestricted access to Pehkui scaling. Have fun!")
         elseif pehkui.p4aCheck then
-            print("P4A detected! You have full access to Pehkui scaling.")
+            print("P4A detected!\nYou have basic access to Pehkui scaling.")
         else
             print("Insufficient permissions for Pehkui scaling. Module has been disabled")
         end	
@@ -113,30 +113,30 @@ end
 function pehkui.setScale(scale, value, forceScaling)
     if pehkui.options[scale] == false and not forceScaling then return end
 
-    local IndexToReplace
+    if pehkui.pehkuiCheck then
+        -- we have pehkui
+        if pehkui.opCheck then
+            -- we have pehkui and op, send this immediately
+            host:sendChatCommand('scale set '..scale..' '..value..' @s')
+        elseif pehkui.p4aCheck then
+            -- we have p4a but not op
+            local str = string.format('p4ascale set "%s" %s', scale, value) -- the command
+            local IndexToReplace
 
-    -- checking to see if the item exists already
-    for index,param in pairs(commandQueue.data) do
-        if string.find(param, scale) then
-            -- give us that index for later
-            IndexToReplace = index
-            break
-        end
-    end
+            -- checking to see if the item exists already
+            for index,param in pairs(commandQueue.data) do
+                if string.find(param, scale) then
+                    -- give us that index for later
+                    IndexToReplace = index
+                    break
+                end
+            end
 
-    if pehkui.opCheck and pehkui.pehkuiCheck then
-        local str = 'scale set '..scale..' '..value..' @s'
-        if IndexToReplace then -- if there is something marked for replacement
-            commandQueue.data[IndexToReplace] = str -- replace it
-        else
-            commandQueue:push(str) -- push it
-        end
-    elseif pehkui.p4aCheck then
-        local str = string.format('p4ascale set "%s" %s', scale, value)
-        if IndexToReplace then -- same thing here
-            commandQueue.data[IndexToReplace] = str
-        else
-            commandQueue:push(str)
+            if IndexToReplace then -- if there is something to replace
+                commandQueue.data[IndexToReplace] = str -- replace it
+            else -- if not
+                commandQueue:push(str) -- push it to queue
+            end
         end
     end
 end
