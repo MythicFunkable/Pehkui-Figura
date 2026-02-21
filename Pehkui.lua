@@ -94,13 +94,13 @@ function events.entity_init()
 end
 
 function events.tick()
-    if queueTimer > 15 then
+    if queueTimer > 20 then 
         queueTimer = 0
 
         if commandQueue:isEmpty() then return end
 
         local command = commandQueue:pop()
-        --log(command)
+
         host:sendChatCommand(command)
     else queueTimer = queueTimer + 1 end
 end
@@ -133,7 +133,8 @@ function pehkui.setScale(scale, value, forceScaling)
             end
 
             if IndexToReplace then -- if there is something to replace
-                commandQueue.data[IndexToReplace] = str -- replace it
+                queueTimer = 0 -- reset the timer
+                commandQueue.data[IndexToReplace] = str -- replace the item in the queue
             else -- if not
                 commandQueue:push(str) -- push it to queue
             end
